@@ -1,0 +1,214 @@
+package dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import config.DBManager;
+import exception.EmployeeException;
+import vo.EmployeeVO;
+
+public class EmployeeDAO {
+	private static EmployeeDAO instance = new EmployeeDAO();
+
+	private EmployeeDAO() {
+
+	}
+
+	public static EmployeeDAO getInstance() {
+		if(instance == null)
+			instance = new EmployeeDAO();
+		return instance;
+	}
+
+	public EmployeeVO selectEmployeeVO(String eno) {
+		EmployeeVO vo = null;
+		String sql = "select * from employee where eno like ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt.setString(1, eno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new EmployeeVO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.getInstance().close(pstmt, rs);
+		}
+		
+		return vo;
+	}
+	
+	public void insertEmployeeVO(EmployeeVO vo) throws EmployeeException {
+		PreparedStatement pstmt = null;
+		String sql = "insert into employee(eno,name,department,position,salary) values(?,?,?,?,?)";
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt.setString(1, vo.getEno());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getDepartment());
+			pstmt.setString(4, vo.getPosition());
+			pstmt.setInt(5, vo.getSalary());
+			int count = pstmt.executeUpdate();
+			if(count == 0)
+				throw new EmployeeException("사원등록에 실패했습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updateEmployee(String name,String department, String posision, int salary) throws EmployeeException {
+		PreparedStatement pstmt = null;
+		String sql = "update  employee set name, department, position, salary = ? where eno = ?";
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt.setString(2, name);
+			pstmt.setString(3, department);
+			pstmt.setString(4, position);
+			pstmt.setInt(5, salary);
+			int count = pstmt.executeUpdate();
+			if(count == 0)
+				throw new EmployeeException("수정 실패");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public EmployeeVO login(String eno, String name) {
+		EmployeeVO vo = null;
+		String sql = "select eno, name, from employee ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt.setString(1, eno);
+			pstmt.setString(2, name);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new EmployeeVO((rs.getString(1), rs.getString(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.getInstance().close(pstmt, rs);
+		}
+		
+		return vo;
+	}
+
+	public void updateMember(EmployeeVO vo) throws EmployeeException {
+		String sql = "update employee set name=?,department?,position=?, salary=? where eno=?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getDepartment());
+			pstmt.setString(4, vo.getPosition());
+			pstmt.setInt(5, vo.getSalary());
+			
+			int count = pstmt.executeUpdate();
+			if(count == 0)
+				throw new EmployeeException("수정할 회원정보가 없습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList<EmployeeVO> selectAllMemberVO() {
+		ArrayList<EmployeeVO> list = new ArrayList<EmployeeVO>();
+		String sql = "select eno, name, department, position, salary "
+				+ "from member, grade_list where grade_no = grade order by grade desc";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		 
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new EmployeeVO(rs.getString(1), rs.getString(2), rs.getString(2), 
+						rs.getString(4), rs.getInt(5)));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.getInstance().close(pstmt, rs);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<EmployeeVO> searchEmployee(String kind, String search) {
+		ArrayList<EmployeeVO> list = new ArrayList<EmployeeVO>();
+		String sql = "select id, name, pass, age, grade_name "
+				+ "from member, grade_list where grade_no = grade and " + kind + " like ? order by grade desc";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new EmployeeVO(rs.getString(1), rs.getString(2), rs.getString(2), 
+						rs.getString(4), rs.getInt(5)));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.getInstance().close(pstmt, rs);
+		}
+		
+		return list;
+	}
+
+	public boolean updateManageEmployee(EmployeeVO vo) {
+		String sql = "update employee set name=?,department=?,position ="
+				+ "(select grade_no from grade_list where grade_name = ?) where id=?";
+		
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setInt(2, vo.getAge());
+			pstmt.setString(3, vo.getGrade());
+			pstmt.setString(4, vo.getId());
+			
+			int count = pstmt.executeUpdate();
+			if(count == 0)
+				return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	
+	public boolean deleteEmployee(String eno) {
+		String sql = "delete from employee where eno?";
+		
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt.setString(1, eno);
+
+			int count = pstmt.executeUpdate();
+			if(count == 0)
+				return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	
+	
+	
+	
+}

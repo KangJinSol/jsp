@@ -1,0 +1,128 @@
+package controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.ModelAndView;
+import service.MemberService;
+import vo.MemberVO;
+
+/**
+ * Servlet implementation class DispatcherServlet
+ */
+//모든 사용자의 요청을 받아오는 서블릿 클래스
+@WebServlet("*.do")
+public class DispatcherServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DispatcherServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset=utf-8");
+		String[] arr = request.getRequestURI().split("/");
+		System.out.println(arr[arr.length-1]);
+		Controller controller = HandlerMapping.getInstance().createController(arr[arr.length-1]);
+		ModelAndView view = null;
+		if(controller != null)
+			view = controller.execute(request, response);
+		//결과 뷰로 이동
+		if(view == null) return;
+		if(view.isSendRedirect()) {
+			response.sendRedirect(view.getPage());
+		}else {
+			request.getRequestDispatcher(view.getPage()).forward(request, response);
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		doGet(request, response);
+	}
+	@WebServlet("/LoginServlet")
+	public class LoginServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+	       
+	    @Override
+		public void destroy() {
+			// TODO Auto-generated method stub
+			super.destroy();
+			System.out.println("Destory LoginServlet");
+		}
+
+		@Override
+		public void init() throws ServletException {
+			// TODO Auto-generated method stub
+			super.init();
+			System.out.println("init LoginServlet");
+		}
+
+		/**
+	     * @see HttpServlet#HttpServlet()
+	     */
+	    public LoginServlet() {
+	        super();
+	        // TODO Auto-generated constructor stub
+	    }
+
+		/**
+		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+		 */
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String id = request.getParameter("id");
+			String pass = request.getParameter("pass");
+			MemberVO vo = MemberService.getInstance().login(id, pass);
+			HttpSession session = request.getSession();
+			if(vo != null) {
+				//세션 처리
+				session.setAttribute("login", true);
+				session.setAttribute("id", vo.getId());
+				session.setAttribute("name", vo.getName());
+				session.setAttribute("grade", vo.getGrade().toLowerCase());
+				response.sendRedirect("main.jsp");
+			}else {
+				session.setAttribute("login", false);
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().append("<script>alert('아이디와 비번을 확인하세요');history.back();</script>");
+				
+			}
+		}
+
+		/**
+		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+		 */
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			request.setCharacterEncoding("utf-8");
+			doGet(request, response);
+		}
+
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+

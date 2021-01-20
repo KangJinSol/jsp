@@ -1,0 +1,71 @@
+package service;
+
+import java.util.ArrayList;
+
+import dao.EmployeeDAO;
+import exception.EmployeeException;
+import vo.EmployeeVO;
+
+public class EmployeeService {
+	private static EmployeeService instance = new EmployeeService();
+	private EmployeeDAO dao;
+	private EmployeeService() {
+		dao = EmployeeDAO.getInstance();
+	}
+	
+	public static EmployeeService getInstance() {
+		if(instance==null)
+			instance= new EmployeeService();
+		return instance;
+	}
+	
+	public void insertEmployeeVO(EmployeeVO vo) throws EmployeeException {
+		//회원정보 조회
+		if(dao.selectEmployeeVO(vo.getEno())!=null)
+			throw new EmployeeException("이미 사원정보가 있습니다.");
+		//회원정보 등록
+		dao.insertEmployeeVO(vo);
+	}
+
+	public void findEmployeeVO(String eno, String name) throws Exception {
+		EmployeeVO vo = dao.selectEmployeeVO(eno);
+		System.out.println(vo.toString());
+		System.out.println(name);
+		if(!vo.getName().equals(name))
+			throw new Exception("정보에 해당하는 사원정보가 없습니다.");
+	}
+	
+	public void updateEmployee(String name, String department, String posision, int salary) throws EmployeeException {
+		dao.updateEmployee(name, department, posision, salary );
+	}
+	
+	public EmployeeVO login(String eno, String name) {
+		return dao.login(eno,name);
+	}
+	public EmployeeVO selectEmployeeVO(String eno) {
+		return dao.selectEmployeeVO(eno);
+	}
+	
+	public void updateEmployeeVO(EmployeeVO vo) throws EmployeeException {
+		dao.updateManageEmployee(vo);
+	}
+	public boolean updateManageEmployeeVO(EmployeeVO vo) throws EmployeeException {
+		return dao.updateManageEmployee(vo);
+	}
+	
+	public ArrayList<EmployeeVO> searchMember(String kind, String search){
+		return dao.searchEmployee(kind,search);
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+package controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.ModelAndView;
+
+public class imageLoadController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		String writer = request.getParameter("writer");
+		String file = request.getParameter("file");
+		return null;
+	}
+
+}

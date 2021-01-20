@@ -1,0 +1,24 @@
+package controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.ModelAndView;
+import service.BoardService;
+
+public class plusLikeHateController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		if(request.getSession().getAttribute("login") == null)
+			return null;
+		int mode = Integer.parseInt(request.getParameter("mode"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		BoardDAO.getInstance().addLikeHate(bno,mode);
+		
+		int count = BoardDAO.getInstance().selectLikeHate(bno,mode);
+		response.getWriter().write(String.valueOf(count));
+		return null;
+	}
+
+}

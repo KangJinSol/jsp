@@ -1,0 +1,10 @@
+package vo;
+
+public class EmployeeVO {
+	private String eno;
+	private String name;
+	private String department;
+	private int posision;
+	
+}
+	

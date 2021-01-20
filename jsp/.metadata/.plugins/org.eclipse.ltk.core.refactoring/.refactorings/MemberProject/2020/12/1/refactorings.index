@@ -1,0 +1,80 @@
+1609226999598	Move 'main.jsp' to 'WebContent'
+1609227008433	Move 'login.jsp' to 'WebContent'
+1609227021605	Move 'template' to 'WebContent'
+1609229002516	Delete elements
+1609229017031	Delete elements
+1609229503117	Move 'member.sql' to 'WEB-INF'
+1609229510077	Move 'member.sql' to 'WebContent'
+1609229516550	Move 'member.sql' to 'META-INF'
+1609229520622	Move 'member.sql' to 'template'
+1609229523264	Move 'member.sql' to 'WebContent'
+1609229531673	Move 'member.sql' to 'WEB-INF'
+1609229536969	Move 'member.sql' to 'lib'
+1609229540476	Move 'member.sql' to 'WebContent'
+1609229694871	Copy compilation unit
+1609229709673	Move file
+1609229737590	Delete element
+1609229752792	Rename type 'member'
+1609229984016	Copy compilation unit
+1609229994397	Delete element
+1609230115135	Copy compilation unit
+1609230121796	Delete element
+1609230660703	Rename type 'memberVo'
+1609231394427	Rename type 'memberVO'
+1609231527918	Delete element
+1609231640627	Delete element
+1609287159401	Move 'member.sql' to 'lib'
+1609287187015	Move 'member.sql' to 'WEB-INF'
+1609287407480	Move 'member.sql' to 'WebContent'
+1609288014027	Move file
+1609288624399	Move 'member.sql' to 'WEB-INF'
+1609293375377	Delete elements
+1609293388027	Delete element
+1609293420099	Delete element
+1609293437685	Delete element
+1609293460137	Delete element
+1609293474930	Delete element
+1609293639541	Delete element
+1609299428370	Delete elements
+1609299443130	Delete element
+1609299459298	Delete element
+1609299474624	Delete element
+1609299487546	Delete element
+1609299522354	Delete element
+1609299604924	Delete elements
+1609299611681	Delete element
+1609309330208	Copy file
+1609313854099	Delete elements
+1609313862511	Delete element
+1609313949224	Delete element
+1609313971481	Delete element
+1609314001136	Delete element
+1609318190455	Delete element
+1609318216086	Delete elements
+1609376094863	Delete element
+1609376105388	Delete element
+1609376876874	Delete element
+1609379444463	Delete element
+1609379460431	Delete element
+1609379501970	Delete element
+1609380191637	Delete element
+1609385599505	Move 'img' to 'WebContent'
+1609386503525	Delete element
+1609386532412	Delete element
+1609386563813	Delete element
+1609386610521	Delete element
+1609386632117	Delete element
+1609394837934	Delete element
+1609395749222	Delete element
+1609395798615	Delete element
+1609395815802	Delete element
+1609399486280	Delete element
+1609399489922	Delete element
+1609399492765	Delete element
+1609399495113	Delete element
+1609399572929	Copy files
+1609399599617	Delete elements
+1609400042131	Copy file
+1609400591511	Copy package
+1609400629291	Copy package
+1609400632943	Move file

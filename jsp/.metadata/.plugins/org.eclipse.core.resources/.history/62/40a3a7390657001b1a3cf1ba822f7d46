@@ -1,0 +1,60 @@
+package vo;
+
+public class EmployeeVO {
+	private String eno;
+	private String name;
+	private String department;
+	private String posision;
+	private int salary
+	
+	public EmployeeVO(String eno, String name, String department, int posision) {
+		super();
+		this.eno = eno;
+		this.name = name;
+		this.department = department;
+		this.posision = posision;
+	}
+
+	public String getEno() {
+		return eno;
+	}
+
+	public void setEno(String eno) {
+		this.eno = eno;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public int getPosision() {
+		return posision;
+	}
+
+	public void setPosision(int posision) {
+		this.posision = posision;
+	}
+
+	@Override
+	public String toString() {
+		return "EmployeeVO [eno=" + eno + ", name=" + name + ", department=" + department + ", posision=" + posision
+				+ "]";
+	}
+	
+	
+	
+	
+}
+	

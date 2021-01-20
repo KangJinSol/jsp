@@ -1,0 +1,62 @@
+<%@page import="service.EmployeeService"%>
+<%@page import="vo.EmployeeVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+<style>
+.container{
+	width:300px;
+	margin:0px auto;
+	height: 600px;
+	padding-top:200px;
+	box-sizing: border-box;
+}
+label{
+	width:100px;
+	display:inline-block;
+	text-align: right;
+	padding-right:10px;
+}
+p{
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+	<%
+	String id = request.getParameter("eno");
+	String pass = request.getParameter("name");
+	
+	if(vo == null){ 
+		%>
+			<script>
+				alert("입력하신 정보를 확인하세요");
+				history.back();
+			</script>
+		<%
+		session.setAttribute("login", false);
+		}else{
+	%>
+		<h2>XX회사 인사관리시스템</h2>
+		<form method="post" action="employee_manager.do">
+			<label for="name">이름 : </label><input type="text" name="name" id="name"><br>
+			<label for="eno">사번 : </label><input type="text" name="eno" id="eno"><br> 
+			<p>
+			<button type="submit">로그인</button>
+			</p>
+		</form>
+		<%
+		}
+		%>
+	</div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="J2EE_EXPORT_OVERWRITE" value="false"/>
+	<item key="J2EE_EXPORT_SOURCE" value="true"/>
+	<list key="MRU_RUNTIME_STORE">
+		<item value="Apache Tomcat v8.5"/>
+		<item value="tomcat"/>
+	</list>
+	<list key="J2EE_EXPORT_JST_WEB">
+		<item value="C:\Users\user\Desktop\EmployeeProject.war"/>
+	</list>
+	<list key="J2EE_IMPORT_null">
+		<item value="C:\Users\user\Desktop\210118war\CheckBox_File.war"/>
+		<item value="C:\Users\user\Desktop\210118war\BoradProject.war"/>
+		<item value="C:\Users\user\Desktop\210118war\MemberProject.war"/>
+		<item value="C:\Users\user\Desktop\210118war\ServletTest.war"/>
+		<item value="C:\Users\user\Desktop\210118war\FileTest.war"/>
+		<item value="C:\Users\user\Desktop\210118war\MemberManagement.war"/>
+	</list>
+</section>

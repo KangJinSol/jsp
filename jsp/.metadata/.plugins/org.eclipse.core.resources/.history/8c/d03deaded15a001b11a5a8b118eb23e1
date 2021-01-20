@@ -1,0 +1,19 @@
+package controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.ModelAndView;
+import service.BoardService;
+
+public class plusLikeHateController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		int mode = Integer.parseInt(request.getParameter("mode"));
+
+		BoardService.getInstance().addHateLike(mode);
+		return null;
+	}
+
+}

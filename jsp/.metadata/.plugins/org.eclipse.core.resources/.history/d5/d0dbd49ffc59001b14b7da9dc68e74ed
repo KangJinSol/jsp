@@ -1,0 +1,5 @@
+package file;
+//파일 정보를 저장
+public class FileDTO {
+
+}

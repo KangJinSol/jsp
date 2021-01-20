@@ -1,0 +1,8 @@
+package dto;
+
+public class EmployeeDTO {
+	private String eno;
+	private String name;
+	private String department;
+	private int posision;
+}
