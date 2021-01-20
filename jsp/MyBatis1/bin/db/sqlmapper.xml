@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="db.sqlmapper">
+ 	<select id="selectAllCountEmployee" resultType="int">
+ 		select count(*) from employee
+ 	</select>
+ 	<select id="selectAllEmployee" resultType="dto.EmployeeDTO">
+ 		select * from employee
+ 	</select>
+ 	<select id="selectPositionEmployee" resultType="dto.EmployeeDTO" parameterType="int">
+ 		<![CDATA[select * from employee where position < #{no}]]>
+ 	</select>
+ 	<select id="selectPositionAreaEmployee" resultType="dto.EmployeeDTO" parameterType="map">
+ 		<![CDATA[select * from employee where position between #{n1} and #{n2}]]>
+ 	</select>
+</mapper>

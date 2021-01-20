@@ -1,0 +1,15 @@
+package dao;
+
+public class EmployeeDAO {
+	private static EmployeeDAO instance = new EmployeeDAO();
+	
+	private EmployeeDAO() {
+		String resouce = "db/mybatis-config.xml"
+	}
+	
+	public static EmployeeDAO getInstance() {
+		if(instance == null)
+			instance = new EmployeeDAO();
+		return instance;
+	}
+}
