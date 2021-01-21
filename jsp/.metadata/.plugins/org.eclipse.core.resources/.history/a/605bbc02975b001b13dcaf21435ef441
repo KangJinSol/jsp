@@ -1,0 +1,14 @@
+package config;
+
+public class DBManager {
+
+	private DBManager() {
+		String resource = "db/mybatis-config.xml";
+	}
+	
+	public static DBManager getInstance() {
+		if(instance == null)
+			instance = new DBManager();
+		return instance;
+	}
+}

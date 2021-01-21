@@ -1,0 +1,17 @@
+package config;
+
+import java.io.InputStream;
+
+public class DBManager {
+
+	private DBManager() {
+		String resource = "db/mybatis-config.xml";
+		InputStream is;
+	}
+	
+	public static DBManager getInstance() {
+		if(instance == null)
+			instance = new DBManager();
+		return instance;
+	}
+}

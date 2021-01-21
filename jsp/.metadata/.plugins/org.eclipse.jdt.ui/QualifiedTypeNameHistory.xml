@@ -1,24 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.w3c.dom.NodeList"/>
-    <fullyQualifiedTypeName name="org.w3c.dom.Node"/>
-    <fullyQualifiedTypeName name="javax.naming.InitialContext"/>
-    <fullyQualifiedTypeName name="javax.sql.DataSource"/>
-    <fullyQualifiedTypeName name="javax.naming.Context"/>
-    <fullyQualifiedTypeName name="org.apache.catalina.realm.DataSourceRealm"/>
-    <fullyQualifiedTypeName name="PersonDTO"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="dto.CommentDTO"/>
-    <fullyQualifiedTypeName name="com.sun.net.httpserver.Authenticator.Result"/>
-    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
-    <fullyQualifiedTypeName name="controller.HandlerMapping"/>
-    <fullyQualifiedTypeName name="controller.Controller"/>
-    <fullyQualifiedTypeName name="org.apache.catalina.filters.SetCharacterEncodingFilter"/>
-    <fullyQualifiedTypeName name="com.sun.java.util.jar.pack.Package.Class.Member"/>
-    <fullyQualifiedTypeName name="vo.MemberVO"/>
     <fullyQualifiedTypeName name="service.MemberService"/>
     <fullyQualifiedTypeName name="dto.QnADTO"/>
     <fullyQualifiedTypeName name="dao.QnADAO"/>
@@ -39,7 +20,6 @@
     <fullyQualifiedTypeName name="org.quartz.Job"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="config.DBManager"/>
     <fullyQualifiedTypeName name="dto.QnaDTO"/>
     <fullyQualifiedTypeName name="service.QnAService"/>
     <fullyQualifiedTypeName name="org.json.JSONObject"/>
@@ -47,9 +27,7 @@
     <fullyQualifiedTypeName name="exception.EmployeeException"/>
     <fullyQualifiedTypeName name="org.quartz.impl.jdbcjobstore.SimplePropertiesTriggerPersistenceDelegateSupport"/>
     <fullyQualifiedTypeName name="model.ModelAndView"/>
-    <fullyQualifiedTypeName name="dto.EmployeeDTO"/>
     <fullyQualifiedTypeName name="vo.EmployeeVO"/>
-    <fullyQualifiedTypeName name="dao.EmployeeDAO"/>
     <fullyQualifiedTypeName name="service.EmployeeService"/>
     <fullyQualifiedTypeName name="file.FileDTO"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -59,5 +37,27 @@
     <fullyQualifiedTypeName name="javax.servlet.ServletOutputStream"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="service.BoardService"/>
+    <fullyQualifiedTypeName name="jdk.internal.loader.Resource"/>
+    <fullyQualifiedTypeName name="com.sun.tools.javac.util.List"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.awt.List"/>
+    <fullyQualifiedTypeName name="java.io.InputStream"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.io.Resources"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactoryBuilder"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
+    <fullyQualifiedTypeName name="config.DBManager"/>
+    <fullyQualifiedTypeName name="config.SQLMapper"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Insert"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Update"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="dao.EmployeeDAO"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Param"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="dto.EmployeeDTO"/>
 </qualifiedTypeNameHistroy>

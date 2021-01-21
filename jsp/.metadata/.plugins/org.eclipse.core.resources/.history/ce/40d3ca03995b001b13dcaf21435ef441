@@ -1,0 +1,18 @@
+package dao;
+
+import org.apache.ibatis.session.SqlSession;
+
+import config.SQLMapper;
+
+public class EmployeeDAO {
+	private static EmployeeDAO instance = new EmployeeDAO();
+	private SqlSession session;
+	private SQLMapper mapper;
+	
+	
+	public static EmployeeDAO getInstance() {
+		if(instance == null)
+			instance = new EmployeeDAO();
+		return instance;
+	}
+}
