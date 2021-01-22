@@ -1,0 +1,21 @@
+package dao;
+
+import java.sql.Connection;
+
+import config.DBManager;
+
+public class StaffDAO {
+	private static StaffDAO instance = new StaffDAO();
+	private DBManager manager;
+	private Connection conn;
+	private StaffDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+	}
+	
+	public static StaffDAO getInstance() {
+		if(instance == null)
+			instance = new StaffDAO();
+		return instance;
+	}
+}

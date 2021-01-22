@@ -29,7 +29,7 @@ public class CronTriggerCreate {
 			
 			//크론을 이용하여 트리거 생성
 			CronTrigger cronTrigger = TriggerBuilder.newTrigger().
-					withIdentity("tigger", "group1").
+					withIdentity("trigger", "group1").
 					withSchedule(CronScheduleBuilder.cronSchedule(timer)).build();
 			
 			factory = new StdSchedulerFactory();

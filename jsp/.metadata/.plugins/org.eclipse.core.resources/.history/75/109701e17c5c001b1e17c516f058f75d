@@ -1,0 +1,22 @@
+package dao;
+
+import dto.StaffDTO;
+
+public class StudentDAO {
+	private static StudentDAO instance = new StudentDAO();
+	
+	private StudentDAO() {
+		
+	}
+	
+	public static StudentDAO getInstance() {
+		if(instance == null)
+			instance = new StudentDAO();
+		return instance;
+	}
+
+	public StaffDTO login(String id, String pass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

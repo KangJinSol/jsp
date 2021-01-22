@@ -1,0 +1,15 @@
+package dao;
+
+public class StaffDAO {
+	private static StaffDAO instance = new StaffDAO();
+	
+	private StaffDAO() {
+		
+	}
+	
+	public static StaffDAO getInstance() {
+		if(instance == null)
+			instance = new StaffDAO();
+		return insatance;
+	}
+}

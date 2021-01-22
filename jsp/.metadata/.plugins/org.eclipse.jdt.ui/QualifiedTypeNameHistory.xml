@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="service.MemberService"/>
-    <fullyQualifiedTypeName name="dto.QnADTO"/>
-    <fullyQualifiedTypeName name="dao.QnADAO"/>
-    <fullyQualifiedTypeName name="dao.MemberDAO"/>
-    <fullyQualifiedTypeName name="java.util.Calendar"/>
-    <fullyQualifiedTypeName name="org.quartz.SchedulerFactory"/>
-    <fullyQualifiedTypeName name="org.quartz.Scheduler"/>
-    <fullyQualifiedTypeName name="org.quartz.JobDetail"/>
     <fullyQualifiedTypeName name="org.quartz.JobBuilder"/>
     <fullyQualifiedTypeName name="org.quartz.TriggerBuilder"/>
     <fullyQualifiedTypeName name="org.quartz.CronScheduleBuilder"/>
@@ -18,19 +10,15 @@
     <fullyQualifiedTypeName name="batch.CronTriggerMaker"/>
     <fullyQualifiedTypeName name="batch.IntervalJob"/>
     <fullyQualifiedTypeName name="org.quartz.Job"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="dto.QnaDTO"/>
     <fullyQualifiedTypeName name="service.QnAService"/>
     <fullyQualifiedTypeName name="org.json.JSONObject"/>
     <fullyQualifiedTypeName name="org.json.JSONArray"/>
     <fullyQualifiedTypeName name="exception.EmployeeException"/>
     <fullyQualifiedTypeName name="org.quartz.impl.jdbcjobstore.SimplePropertiesTriggerPersistenceDelegateSupport"/>
-    <fullyQualifiedTypeName name="model.ModelAndView"/>
     <fullyQualifiedTypeName name="vo.EmployeeVO"/>
     <fullyQualifiedTypeName name="service.EmployeeService"/>
     <fullyQualifiedTypeName name="file.FileDTO"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="dto.FileDTO"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
@@ -46,13 +34,11 @@
     <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactoryBuilder"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
-    <fullyQualifiedTypeName name="config.DBManager"/>
     <fullyQualifiedTypeName name="config.SQLMapper"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Insert"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Update"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="dao.EmployeeDAO"/>
@@ -60,4 +46,18 @@
     <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Param"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="dto.EmployeeDTO"/>
+    <fullyQualifiedTypeName name="service.StudentService"/>
+    <fullyQualifiedTypeName name="dao.StudentDAO"/>
+    <fullyQualifiedTypeName name="controller.HandlerMapping"/>
+    <fullyQualifiedTypeName name="controller.Controller"/>
+    <fullyQualifiedTypeName name="model.ModelAndView"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="config.DBManager"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="dao.StaffDAO"/>
+    <fullyQualifiedTypeName name="dto.StaffDTO"/>
+    <fullyQualifiedTypeName name="service.StaffService"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

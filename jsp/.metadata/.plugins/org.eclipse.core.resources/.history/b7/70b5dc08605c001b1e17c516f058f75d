@@ -1,0 +1,19 @@
+package service;
+
+import dao.StudentDAO;
+
+public class StaffService {
+	private static StaffService instance = new StaffService();
+	private StudentDAO dao;
+	
+	private StaffService() {
+		dao = StudentDAO.getInstance();
+	}
+	
+	public static StudentService getInstance() {
+		if(instance==null)
+			instance= new StaffService();
+		return instance;
+	}
+	
+}

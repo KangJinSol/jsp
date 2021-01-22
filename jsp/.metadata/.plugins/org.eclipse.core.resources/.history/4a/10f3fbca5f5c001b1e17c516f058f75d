@@ -1,0 +1,12 @@
+package service;
+
+import dao.StudentDAO;
+
+public class StudentService {
+	private static StudentService instance = new StudentService();
+	private StudentDAO dao;
+	
+	private StudentService() {
+		dao = 
+	}
+}

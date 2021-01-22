@@ -231,7 +231,7 @@
 						<a href="#" class="btn_like">
 							<img src="${pageContext.request.contextPath }/img/like.png" class="hate">
 							<!-- 싫어요 개수 -->
-							<span>${requestScope.board.bLike }</span>
+							<span>${requestScope.board.bHate }</span>
 						</a>
 					</td>
 				</tr>
@@ -286,14 +286,3 @@
 	<jsp:include page="/template/footer.jsp" flush="false"></jsp:include>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

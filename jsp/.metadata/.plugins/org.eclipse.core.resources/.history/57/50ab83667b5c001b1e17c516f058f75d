@@ -1,0 +1,25 @@
+package controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dto.StaffDTO;
+import model.ModelAndView;
+
+public class LoginController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		String pass =request.getParameter("pass");
+		ModelAndView view = null;
+		StaffDTO dto = StaffDTO.getInstance().login(id,name);
+		
+		if(dto != null) {
+			request.getSession().setAttribute("dto", dto);
+		}
+		
+		return view;
+	}
+
+}

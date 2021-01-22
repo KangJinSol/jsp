@@ -1,0 +1,27 @@
+package dao;
+
+import java.sql.Connection;
+
+import config.DBManager;
+import dto.StaffDTO;
+
+public class StaffDAO {
+	private static StaffDAO instance = new StaffDAO();
+	private DBManager manager;
+	private Connection conn;
+	private StaffDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+	}
+	
+	public static StaffDAO getInstance() {
+		if(instance == null)
+			instance = new StaffDAO();
+		return instance;
+	}
+	
+	public StaffDTO login(String id, String pass) {
+		String sql = "select s.id, s.pass, "
+		return dto;
+	}
+}
