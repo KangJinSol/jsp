@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="java" project="JUnit5_TEST" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="test.EmployeeDTOTest" time="0.337" displayname="EmployeeDTOTest" uniqueid="[engine:junit-jupiter]/[class:test.EmployeeDTOTest]">
+    <testcase name="testSelectBottom5Salary" classname="test.EmployeeDTOTest" time="0.324" displayname="하위연봉5명 조회 테스트" uniqueid="[engine:junit-jupiter]/[class:test.EmployeeDTOTest]/[method:testSelectBottom5Salary()]"/>
+    <testcase name="testEmptyEmployeeList" classname="test.EmployeeDTOTest" time="0.003" displayname="빈리스트 확인 테스트" uniqueid="[engine:junit-jupiter]/[class:test.EmployeeDTOTest]/[method:testEmptyEmployeeList()]"/>
+    <testcase name="testSelectEmployeeList" classname="test.EmployeeDTOTest" time="0.003" displayname="사원정보리스트 조회 테스트" uniqueid="[engine:junit-jupiter]/[class:test.EmployeeDTOTest]/[method:testSelectEmployeeList()]"/>
+    <testcase name="testselectEmployee" classname="test.EmployeeDTOTest" time="0.007" displayname="사원정보 하나 조회" uniqueid="[engine:junit-jupiter]/[class:test.EmployeeDTOTest]/[method:testselectEmployee()]"/>
+  </testsuite>
+</testrun>
