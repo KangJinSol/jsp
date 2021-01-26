@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 3 elements from project &apos;JUnit5_TEST&apos;&#x0D;&#x0A;- Original project: &apos;JUnit5_TEST&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     JUnit5_TEST/src/main/java/config&#x0D;&#x0A;     JUnit5_TEST/src/main/java/dao&#x0D;&#x0A;     JUnit5_TEST/src/main/java/main" description="Delete elements" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;main" element2="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;dao" element3="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;config" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1611560001824" subPackages="false" version="1.0"/>
+</session>

@@ -1,0 +1,1 @@
+select e.eno, e.name, e.department, p.position_name s.salary from employee e, position_list p , employee_salary s;

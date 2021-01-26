@@ -1,0 +1,12 @@
+package main;
+
+import java.sql.Connection;
+
+public class DBManager {
+	private static DBManager manager = new DBManager();
+	private Connection connection;
+	
+	public DBManager() {
+		Class.forName("");
+	}
+}
