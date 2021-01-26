@@ -53,4 +53,28 @@
  	 		 </choose>
  	 		  where pagenum = #{pageNo} 	 	
  	 	</select>
+ 	 	<insert id="insertBoardComment" parameterType="dto.CommentDTO">
+ 	 		insert into board_comment(cno, bno, writer, content) values(cno_seq.nextval,#{bno},#{writer},#{content})
+ 	 	</insert>
+ 	 	<select id="selectCommentDTO" parameterType="int" resultType="dto.CommentDTO">
+ 	 		select * from board_comment where bno = #{bno} order by cno desc
+ 	 	</select>
+ 	 	<select id="commentCount" parameterType="int" resultType="int">
+ 	 		select count(*) from board_comment where bno = #{bno}
+ 	 	</select>
+ 	 	<select id="getCount" resultType="int">
+ 	 		select count(*) from board
+ 	 	</select>
+ 	 	<insert id="insertFileList" parameterType="dto.FileDTO">
+ 	 		insert into board_file_list values(#{bno},#{writer},#{fileName})
+ 	 	</insert>
+ 	 	<select id="selectFileList" parameterType="int" resultType="dto.FileDTO">
+ 	 		select * from board_file_list where bno = #{bno}
+ 	 	</select>
+		<delete id="deleteFileList" parameterType="int">
+			delete from board_file_list where bno = #{bno}
+		</delete>
+		<delete id="deleteBoard" parameterType="int">
+			delete from board where bno = #{bno}
+		</delete>
 </mapper>

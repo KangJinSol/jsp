@@ -1,0 +1,136 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import config.DBManager;
+import dto.StaffDTO;
+
+public class StaffDAO {
+	private static StaffDAO instance = new StaffDAO();
+	private DBManager manager;
+	private Connection conn;
+	private StaffDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+	}
+	
+	public static StaffDAO getInstance() {
+		if(instance == null)
+			instance = new StaffDAO();
+		return instance;
+	}
+	
+	public StaffDTO login(String id, String pass) {
+		StaffDTO dto = null;
+		String sql = "select sf.id, sf.pass, sf.name, sf.position, ml.mno, ml.mname from edu_person sf, major_list ml where sf.id = sf.id(+) and  id like ? and pass like ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+			try {
+				pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, pass);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					dto = new StaffDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),rs.getInt(6),rs.getString(7));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				DBManager.getInstance().close(pstmt, rs);
+			}
+		return dto;
+	}
+
+	public ArrayList<StaffDTO> selectAllStaff() {
+		String sql = "select id, pass, name, position, status from edu_person";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<StaffDTO> list = new ArrayList<StaffDTO>();
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			rs = pstmt.executeQuery();
+	
+			while(rs.next()) {
+				list.add(new StaffDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int insertMajor(StaffDTO staffDTO) {
+		String sql = "insert into major_list values(?,?)";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, StaffDTO.getMno());
+			pstmt.setString(2, StaffDTO.getMname());
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int updateMajor(StaffDTO staffDTO) {
+		String sql = "update Major_list set mname=? where mno=?";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, StaffDTO.getMname());
+			count = pstmt.executeUpdate();
+			conn.commit();
+			System.out.println(count);
+			if(count == 0) return 0;
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+	
+	public int deleteMajor(int mno) {
+		String sql = "delete from major_list where mno=?";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mno);
+			count = pstmt.executeUpdate();
+			conn.commit();
+			System.out.println(count);
+			if(count == 0) return 0;
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public ArrayList<String> selectAllMajorList() {
+		String sql = "select * from major_list";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+}

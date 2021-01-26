@@ -1,0 +1,23 @@
+package controller;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dto.StudentDTO;
+import model.ModelAndView;
+import service.StudentService;
+
+public class SearchController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		String kind = request.getParameter("kind");
+		String search = request.getParameter("search");
+		ArrayList<StudentDTO> list = StudentService.getInstance().selectSearchStudent(kind,search);
+		ArrayList<String> major = StudentService.selectAllMajor();
+		return null;
+	}
+
+}

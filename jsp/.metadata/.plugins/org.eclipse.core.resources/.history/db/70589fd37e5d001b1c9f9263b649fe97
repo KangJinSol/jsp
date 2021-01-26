@@ -1,0 +1,26 @@
+package service;
+
+import dao.MajorDAO;
+import dto.MajorDTO;
+
+public class MajorService {
+	private static MajorService instance = new MajorService();
+	private MajorDAO dao;
+	
+	private MajorService() {
+		dao = MajorDAO.getInstance();
+	}
+	
+	public static MajorService getInstance() {
+		if(instance==null)
+			instance= new MajorService();
+		return instance;
+	}
+
+	public int insertMajor(MajorDTO majorDTO) {
+		return dao.insertMajor(majorDTO);
+	}
+		public int deleteMajor(int mno) {
+			return dao.deleteMajor(mno);
+		}
+	}

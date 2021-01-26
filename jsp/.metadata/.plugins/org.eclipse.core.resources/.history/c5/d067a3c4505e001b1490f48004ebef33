@@ -1,0 +1,28 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dto.StaffDTO;
+import model.ModelAndView;
+import service.StaffService;
+
+public class RegisterController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		String mname = request.getParameter("mname");
+		
+		int count = StaffService.getInstance().insertMajor(new StaffDTO(mno, mname));
+		try {
+			response.getWriter().write(String.valueOf(count));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

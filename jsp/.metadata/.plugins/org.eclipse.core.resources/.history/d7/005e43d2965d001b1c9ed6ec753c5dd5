@@ -1,0 +1,17 @@
+package batch;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+import dao.StudentDAO;
+
+
+public class ScoreQuartz  implements Job{
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		int count = StudentDAO.getInstance().;
+		System.out.println("이번학기 학사경고 대상자");
+	}
+
+}

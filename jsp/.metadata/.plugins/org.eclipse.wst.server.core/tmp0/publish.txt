@@ -1,6 +1,4 @@
 #Tomcat publish data
-#Fri Jan 22 17:14:36 KST 2021
-org.eclipse.jst.jee.server\:step01=C\:\\JAVA\\tomcat\\wtpwebapps\\step01
-org.eclipse.jst.jee.server\:FileTest=C\:\\JAVA\\tomcat\\wtpwebapps\\FileTest
+#Mon Jan 25 12:52:01 KST 2021
 org.eclipse.jst.jee.server\:BoardJSPFinal=C\:\\JAVA\\tomcat\\wtpwebapps\\BoardJSPFinal
 org.eclipse.jst.jee.server\:MemberManagement=C\:\\JAVA\\tomcat\\wtpwebapps\\MemberManagement

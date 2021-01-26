@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.quartz.JobBuilder"/>
-    <fullyQualifiedTypeName name="org.quartz.TriggerBuilder"/>
-    <fullyQualifiedTypeName name="org.quartz.CronScheduleBuilder"/>
-    <fullyQualifiedTypeName name="org.quartz.impl.StdSchedulerFactory"/>
-    <fullyQualifiedTypeName name="org.quartz.CronTrigger"/>
-    <fullyQualifiedTypeName name="bach.CronTriggerMaker"/>
-    <fullyQualifiedTypeName name="bach.IntervalJob"/>
     <fullyQualifiedTypeName name="batch.CronTriggerMaker"/>
     <fullyQualifiedTypeName name="batch.IntervalJob"/>
     <fullyQualifiedTypeName name="org.quartz.Job"/>
@@ -23,7 +16,6 @@
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletOutputStream"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="service.BoardService"/>
     <fullyQualifiedTypeName name="jdk.internal.loader.Resource"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.List"/>
@@ -46,18 +38,26 @@
     <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Param"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="dto.EmployeeDTO"/>
-    <fullyQualifiedTypeName name="service.StudentService"/>
-    <fullyQualifiedTypeName name="dao.StudentDAO"/>
     <fullyQualifiedTypeName name="controller.HandlerMapping"/>
     <fullyQualifiedTypeName name="controller.Controller"/>
-    <fullyQualifiedTypeName name="model.ModelAndView"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="config.DBManager"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="dao.StaffDAO"/>
     <fullyQualifiedTypeName name="dto.StaffDTO"/>
     <fullyQualifiedTypeName name="service.StaffService"/>
+    <fullyQualifiedTypeName name="model.ModelAndView"/>
+    <fullyQualifiedTypeName name="org.apache.catalina.connector.Response"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="com.sun.net.httpserver.Authenticator.Result"/>
+    <fullyQualifiedTypeName name="dao.MajorDAO"/>
+    <fullyQualifiedTypeName name="dto.MajorDTO"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="service.MajorService"/>
+    <fullyQualifiedTypeName name="dao.StudentDAO"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="service.StudentService"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="dto.StudentDTO"/>
 </qualifiedTypeNameHistroy>

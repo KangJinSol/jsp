@@ -1,0 +1,14 @@
+package dao;
+
+import java.sql.Connection;
+
+import config.DBManager;
+
+public class MajorDAO {
+	private static MajorDAO instance = new EmployeeDAO();
+	private DBManager manager;
+	private Connection conn;
+	private MajorDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+}

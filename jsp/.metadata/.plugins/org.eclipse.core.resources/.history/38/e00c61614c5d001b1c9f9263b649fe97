@@ -1,0 +1,23 @@
+package dao;
+
+import java.sql.Connection;
+
+import config.DBManager;
+import dto.StaffDTO;
+
+public class StudentDAO {
+	private static StudentDAO instance = new StudentDAO();
+	private DBManager manager;
+	private Connection conn;
+	private StudentDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+	}
+	
+	public static StudentDAO getInstance() {
+		if(instance == null)
+			instance = new StudentDAO();
+		return instance;
+	}
+
+}

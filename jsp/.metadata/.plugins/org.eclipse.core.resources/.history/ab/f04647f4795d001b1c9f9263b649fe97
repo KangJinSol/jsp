@@ -1,0 +1,36 @@
+package service;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import dao.MajorDAO;
+import dto.MajorDTO;
+
+public class MajorService {
+	private static StudentService instance = new StudentService();
+	private MajorDAO dao;
+	
+	private MajorService() {
+		dao = MajorDAO.getInstance();
+	}
+	
+	public static StudentService getInstance() {
+		if(instance==null)
+			instance= new MajorService();
+		return instance;
+	}
+	
+	public int insertStudentMajor() {
+		String sql = "insert into major_list values(?,?)";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, MajorDTO.getMno());
+			pstmt.setString(2, MajorDTO.getMname());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+}

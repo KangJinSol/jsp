@@ -1,0 +1,66 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import config.DBManager;
+import dto.MajorDTO;
+
+public class MajorDAO {
+	private static MajorDAO instance = new MajorDAO();
+	private DBManager manager;
+	private Connection conn;
+	
+	private MajorDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+}
+	public static MajorDAO getInstance() {
+		if(instance == null)
+			instance = new MajorDAO();
+		return instance;
+	}
+	
+	public int insertMajor(MajorDTO majorDTO) {
+		String sql = "insert into major_list values(?,?)";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, MajorDTO.getMno());
+			pstmt.setString(2, MajorDTO.getMname());
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int updateMajor(MajorDTO majorDTO) {
+		String sql = "update Major_list set mname=? where mno=?";
+		return count;
+	}
+	
+	public int deleteMajor(int mno) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, mno);
+			count = pstmt.executeUpdate();
+			conn.commit();
+			System.out.println(count);
+			if(count == 0) return 0;
+			pstmt.close();
+			pstmt.setInt(1, mno);
+			pstmt = conn.prepareStatement(sql2);
+			count = pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+}

@@ -1,0 +1,34 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dto.StaffDTO;
+import model.ModelAndView;
+import service.StaffService;
+import service.StudentService;
+
+public class UpdateController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
+		String name = request.getParameter("name");
+		String position = request.getParameter("position");
+		int status = Integer.parseInt(request.getParameter("status"));
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		String mname = request.getParameter("mname");
+		
+		int count = StudentService.getInstance().updateMajor(new StaffDTO(id, pass, name, position, status, mno, mname));
+		try {
+			response.getWriter().write(String.valueOf(count));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

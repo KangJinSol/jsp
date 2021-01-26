@@ -40,16 +40,3 @@ public class StartBatch implements ServletContextListener {
     }
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

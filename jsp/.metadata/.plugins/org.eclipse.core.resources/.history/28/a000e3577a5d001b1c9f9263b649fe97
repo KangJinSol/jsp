@@ -1,0 +1,23 @@
+package controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dto.MajorDTO;
+import dto.StudentDTO;
+import model.ModelAndView;
+import service.StudentService;
+
+public class RegisterController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		String mname = request.getParameter("mname");
+		
+		int count = StudentService.getInstance().insertStudentMajor(new MajorDTO(mno, mname));
+		
+		return null;
+	}
+
+}

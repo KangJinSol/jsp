@@ -1,0 +1,17 @@
+package controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.ModelAndView;
+
+public class RegisterController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		String mno = request.getParameter("mno");
+		String mname = request.getParameter("mname");
+		return null;
+	}
+
+}

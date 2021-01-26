@@ -8,15 +8,16 @@
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
         <property name="driver" value="oracle.jdbc.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
-        <property name="username" value="scott"/>
-        <property name="password" value="tiger"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <property name="username" value="kjs"/>
+        <property name="password" value="123456"/>
       </dataSource>
     </environment>
   </environments>
   <mappers>
     <mapper resource="config/member-mapper.xml"/>
     <mapper resource="config/board-mapper.xml"/>
+    <mapper resource="config/qna-mapper.xml"/>
     
   </mappers>
 </configuration>

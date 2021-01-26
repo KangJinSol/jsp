@@ -2,7 +2,7 @@
 <Context path="/">
 <Resource name="jdbc/myoracle" auth="Container"
 		type="javax.sql.DataSource"  driverClassName="oracle.jdbc.OracleDriver"
-		url="jdbc:oracle:thin:@175.197.213.135:32769:xe"
-		username="scott" defaultAutoCommit="false" password="tiger"
+		url="jdbc:oracle:thin:@localhost:32769:xe"
+		username="kjs" defaultAutoCommit="false" password="123456"
 		maxTotal="5" maxIdle="1" maxWait="5000" testOnBorrow="true"/>
 </Context>

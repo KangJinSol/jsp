@@ -1,0 +1,49 @@
+package service;
+
+import java.util.ArrayList;
+
+import dao.StaffDAO;
+import dto.StaffDTO;
+
+public class StaffService {
+	private static StaffService instance = new StaffService();
+	private StaffDAO dao;
+	
+	private StaffService() {
+		dao = StaffDAO.getInstance();
+	}
+	
+	public static StaffService getInstance() {
+		if(instance==null)
+			instance= new StaffService();
+		return instance;
+	}
+
+	public StaffDTO login(String id, String pass) {
+		return dao.login(id, pass);
+	}
+
+	public ArrayList<StaffDTO> selectAllStaff() {
+		return dao.selectAllStaff();
+	}
+	
+	public int insertMajor(StaffDTO staffDTO) {
+		int count = dao.insertMajor(staffDTO);
+		if(count == 0 ) return 0;
+		return dao.insertMajor(staffDTO);
+	}
+	
+
+	public int updateMajor(StaffDTO staffDTO) {
+		return dao.updateMajor(staffDTO);
+	}
+
+	public int deleteEmployee(int mno) {
+		return dao.deleteMajor(mno);
+	}
+	
+	public static ArrayList<String> selectAllMajorList() {
+		return dao.selectAllMajorList();
+	}
+
+}

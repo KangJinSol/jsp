@@ -17,10 +17,3 @@ public class IntervalJob implements Job {
 	}
 
 }
-
-
-
-
-
-
-

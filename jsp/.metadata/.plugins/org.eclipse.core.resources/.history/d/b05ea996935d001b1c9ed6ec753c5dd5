@@ -1,0 +1,85 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+
+import config.DBManager;
+import dto.StudentDTO;
+
+public class StudentDAO {
+	private static StudentDAO instance = new StudentDAO();
+	private DBManager manager;
+	private Connection conn;
+	private StudentDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+	}
+	
+	public static StudentDAO getInstance() {
+		if(instance == null)
+			instance = new StudentDAO();
+		return instance;
+	}
+
+	public ArrayList<StudentDTO> selectAllStudent() {
+		String sql = "select sd.sno, sd.name, sd.major, sd.score from student sd where sd.sno = sd.sno(+)";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<StudentDTO>list = new ArrayList<StudentDTO>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new StudentDTO(rs.getString(1), rs.getString(2), rs.getInt(3),rs.getInt(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public ArrayList<String> selectAllMajorList() {
+		String sql = "select * from major_list";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public ArrayList<StudentDTO> selectAllStudent(String kind, String search) {
+		String sql = "select * from (select sd.sno, sd.name, sd.major, sd.score from student sd where sd.sno like ? and sd.major like ? ";
+		sql += kind + " like ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<StudentDTO> list = new ArrayList<StudentDTO>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new StudentDTO(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	
+}

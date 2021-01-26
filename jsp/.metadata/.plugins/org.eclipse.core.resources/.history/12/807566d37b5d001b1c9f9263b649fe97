@@ -1,0 +1,38 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import config.DBManager;
+import dto.MajorDTO;
+
+public class MajorDAO {
+	private static MajorDAO instance = new MajorDAO();
+	private DBManager manager;
+	private Connection conn;
+	
+	private MajorDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+}
+	public static MajorDAO getInstance() {
+		if(instance == null)
+			instance = new MajorDAO();
+		return instance;
+	}
+	
+	public int insertStudentMajor(MajorDTO majorDTO) {
+		String sql = "insert into major_list values(?,?)";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, MajorDTO.getMno());
+			pstmt.setString(2, MajorDTO.getMname());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+}

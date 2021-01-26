@@ -1,0 +1,55 @@
+package dto;
+
+public class StudentDTO {
+	int sno;
+	String name;
+	String major;
+	int score;
+	
+	public StudentDTO(int sno, String name, String major, int score) {
+		super();
+		this.sno = sno;
+		this.name = name;
+		this.major = major;
+		this.score = score;
+	}
+
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return "StudentDTO [sno=" + sno + ", name=" + name + ", major=" + major + ", score=" + score + "]";
+	}
+	
+	
+}

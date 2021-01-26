@@ -21,6 +21,8 @@ C:\workspace\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\134495369
 \step1\src
 C:\workspace\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1947845774.index
 \BoardJSPFinal\src
+C:\workspace\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1196359176.index
+\StudentProject\src
 C:\workspace\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1518103994.index
 \MemberManagement2\src
 C:\workspace\jsp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\412189574.index

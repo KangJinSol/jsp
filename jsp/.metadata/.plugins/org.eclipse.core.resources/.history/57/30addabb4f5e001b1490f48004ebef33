@@ -1,0 +1,38 @@
+package controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import dto.StudentDTO;
+import model.ModelAndView;
+import service.MajorService;
+import service.StudentService;
+
+public class SearchController implements Controller {
+
+	@Override
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
+		String kind = request.getParameter("kind");
+		String search = request.getParameter("search");
+		ArrayList<StudentDTO> list = StudentService.getInstance().selectSearchStudent(kind,search);
+		ArrayList<String> major = StaffService.selectAllMajorList();
+		JSONArray array = new JSONArray(list);
+		JSONArray majList = new JSONArray(major);
+		JSONObject obj = new JSONObject();
+		obj.put("list", list);
+		obj.put("major", major);
+		try {
+			response.getWriter().write(obj.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

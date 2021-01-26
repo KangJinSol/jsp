@@ -1,0 +1,37 @@
+package service;
+
+import java.util.ArrayList;
+
+import dao.StudentDAO;
+import dto.StudentDTO;
+
+public class StudentService {
+	private static StudentService instance = new StudentService();
+	private static StudentDAO dao;
+	
+	private StudentService() {
+		dao = StudentDAO.getInstance();
+	}
+	
+	public static StudentService getInstance() {
+		if(instance==null)
+			instance= new StudentService();
+		return instance;
+	}
+	
+	public ArrayList<StudentDTO> selectSearchStudent(String kind, String search) {
+		return dao.selectAllStudent(kind,search);
+	}
+
+	public ArrayList<StudentDTO> selectAllStudent() {
+		return dao.selectAllStudent();
+	}
+	
+
+	public ArrayList<StudentDTO> SearchScore() {
+		return dao.SearchScore();
+	}
+
+
+
+}

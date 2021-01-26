@@ -1,0 +1,86 @@
+package dto;
+
+public class StaffDTO {
+	private String id;
+	private String pass;
+	private String name;
+	private String position;
+	private int status;
+	private static int mno;
+	private String mname;
+	
+	public StaffDTO(String id, String pass, String name, String position, int status, int mno, String mname) {
+		super();
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.position = position;
+		this.status = status;
+		this.mno = mno;
+		this.mname = mname;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public static int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	@Override
+	public String toString() {
+		return "StaffDTO [id=" + id + ", pass=" + pass + ", name=" + name + ", position=" + position + ", status="
+				+ status + ", mno=" + mno + ", mname=" + mname + "]";
+	}
+	
+
+}

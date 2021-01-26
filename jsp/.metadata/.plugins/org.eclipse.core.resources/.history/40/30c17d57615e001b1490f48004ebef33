@@ -1,0 +1,156 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+
+import config.DBManager;
+import dto.StaffDTO;
+import dto.StudentDTO;
+
+public class StudentDAO {
+	private static StudentDAO instance = new StudentDAO();
+	private DBManager manager;
+	private Connection conn;
+	private StudentDAO() {
+		manager = DBManager.getInstance();
+		conn = manager.getConn();
+	}
+	
+	public static StudentDAO getInstance() {
+		if(instance == null)
+			instance = new StudentDAO();
+		return instance;
+	}
+
+	public ArrayList<StudentDTO> selectAllStudent() {
+		String sql = "select sd.sno, sd.name, sd.major, sd.score, ml.mno, ml,mname from student sd, major_list ml where sd.major = ml.mno(+)";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<StudentDTO>list = new ArrayList<StudentDTO>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new StudentDTO(rs.getString(1), rs.getString(2), rs.getInt(3),rs.getInt(4),rs.getInt(1),rs.getString(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	public ArrayList<StudentDTO> selectAllStudent(String kind, String search) {
+		String sql = "select * from (select sd.sno, sd.name, sd.major, sd.score from student sd where sd.sno like ? and sd.major like ? ";
+		sql += kind + " like ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<StudentDTO> list = new ArrayList<StudentDTO>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new StudentDTO(rs.getString(1), rs.getString(2), rs.getInt(3),rs.getInt(4),rs.getInt(1),rs.getString(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<StudentDTO> SearchScore() {
+		String sql = "select score from student where score < 2.0";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<StudentDTO> list = new ArrayList<StudentDTO>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
+	
+	public int updateMajor(StudentDTO studentDTO) {
+		String sql = "update Major_list set mname=? where mno=?";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, StudentDTO.getMname());
+			count = pstmt.executeUpdate();
+			conn.commit();
+			System.out.println(count);
+			if(count == 0) return 0;
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+	
+	public int deleteMajor(int mno) {
+		String sql = "delete from major_list where mno=?";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mno);
+			count = pstmt.executeUpdate();
+			conn.commit();
+			System.out.println(count);
+			if(count == 0) return 0;
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public ArrayList<String> selectAllMajorList() {
+		String sql = "select * from major_list";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int insertMajor(StudentDTO studentDTO) {
+		String sql = "insert into major_list values(?,?)";
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, StudentDTO.getMno());
+			pstmt.setString(2, StudentDTO.getMname());
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+}

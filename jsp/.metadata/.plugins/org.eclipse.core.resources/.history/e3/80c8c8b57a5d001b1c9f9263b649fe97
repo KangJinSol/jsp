@@ -1,0 +1,23 @@
+package service;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import dao.MajorDAO;
+import dto.MajorDTO;
+
+public class MajorService {
+	private static MajorService instance = new MajorService();
+	private MajorDAO dao;
+	
+	private MajorService() {
+		dao = MajorDAO.getInstance();
+	}
+	
+	public static MajorService getInstance() {
+		if(instance==null)
+			instance= new MajorService();
+		return instance;
+	}
+	
+	}
