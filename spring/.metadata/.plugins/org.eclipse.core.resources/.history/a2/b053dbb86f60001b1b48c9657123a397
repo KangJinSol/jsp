@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+</script>
+</head>
+<body>
+<form id="frm">
+	<input type="text" name="product_no">
+	<input type="text" name="product_name">
+	<input type="text" name="price">
+	<input type="text" name="ea">
+	<input type="text" name="maker">
+	<button type="button">상품등록</button>
+</form>
+<hr>
+<div>
+
+</div>
+</body>
+</html>

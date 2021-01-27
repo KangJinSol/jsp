@@ -1,0 +1,26 @@
+package dao;
+
+import java.sql.Connection;
+
+import config.DBManager;
+import dto.ProductDTO;
+
+public class ProductDAO {
+	private static ProductDAO instance = new ProductDAO();
+	private Connection conn;
+	
+	private ProductDAO() {
+		conn = DBManager.getInstance().getConnection();
+	}
+	
+	public static ProductDAO getInstacne() {
+		if(instance == null)
+			instance = new ProductDAO();
+		return instance;
+	}
+	
+	public void insertProduct(ProductDTO productDTO) {
+		String sql = "insert int product values(?,?,?,?,?)"
+	}
+	
+}

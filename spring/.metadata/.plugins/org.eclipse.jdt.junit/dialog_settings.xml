@@ -3,7 +3,7 @@
 	<section name="JUnitWizards">
 		<item key="NewTestCaseCreationWizardPage.USE_SETUP" value="true"/>
 		<item key="NewTestCaseCreationWizardPage.USE_TEARDOWN" value="false"/>
-		<item key="NewTestCaseCreationWizardPage.USE_SETUPCLASS" value="false"/>
+		<item key="NewTestCaseCreationWizardPage.USE_SETUPCLASS" value="true"/>
 		<item key="NewTestCaseCreationWizardPage.USE_TEARDOWNCLASS" value="false"/>
 		<item key="NewTestCaseCreationWizardPage.USE_CONSTRUCTOR" value="false"/>
 	</section>

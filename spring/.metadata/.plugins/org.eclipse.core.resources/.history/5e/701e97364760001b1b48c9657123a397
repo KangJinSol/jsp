@@ -1,0 +1,5 @@
+package com.korea.springdi;
+
+public class Person {
+
+}

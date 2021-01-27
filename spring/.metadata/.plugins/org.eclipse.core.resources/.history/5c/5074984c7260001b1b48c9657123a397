@@ -1,0 +1,12 @@
+package dao;
+
+import java.sql.Connection;
+
+public class ProductDAO {
+	private static ProductDAO instance = new ProductDAO();
+	private Connection conn;
+	
+	private ProductDAO() {
+		conn = DBManage
+	}
+}

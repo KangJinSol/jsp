@@ -1,0 +1,13 @@
+package com.korea.Spring.DI;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppContext {
+	@Bean
+	public Greeting greeter() {
+		Greeting g = new Greeting(1000, "di-test");
+		return g;
+	}
+}

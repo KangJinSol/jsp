@@ -72,4 +72,34 @@
 	</section>
 	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="ProductWeb"/>
+			<item value="DIWebProject"/>
+			<item value="EmployeeWeb"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="ProductWeb"/>
+			<item value="DIWebProject"/>
+			<item value="EmployeeWeb"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\workspace\spring\Spring.DI"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
 </section>

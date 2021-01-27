@@ -1,0 +1,9 @@
+package di;
+
+public class DIContainer {
+	private static DIContainer getContainer() {
+		if(container == null)
+			container = new new DIContainer();
+		return container;
+	}
+}

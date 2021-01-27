@@ -1,0 +1,11 @@
+package di;
+
+public class DIContainer {
+	private static DIContainer container = new DIContainer();
+	
+	public static DIContainer getContainer() {
+		if(container == null)
+			container = new DIContainer();
+		return container;
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;test.ProductTest.java&apos; to &apos;ProductDAOTest.java&apos;&#x0D;&#x0A;- Original project: &apos;ProductWeb&apos;&#x0D;&#x0A;- Original element: &apos;test.ProductTest.java&apos;&#x0D;&#x0A;- Renamed element: &apos;test.ProductDAOTest.java&apos;" description="Rename compilation unit &apos;ProductTest.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;test{ProductTest.java" name="ProductDAOTest.java" references="false" stamp="1611733217237" version="1.0"/>
+</session>

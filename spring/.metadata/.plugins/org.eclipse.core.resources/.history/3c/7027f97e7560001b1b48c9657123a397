@@ -1,0 +1,37 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import config.DBManager;
+import dto.ProductDTO;
+
+public class ProductDAO {
+	private static ProductDAO instance = new ProductDAO();
+	private Connection conn;
+	
+	private ProductDAO() {
+		conn = DBManager.getInstance().getConnection();
+	}
+	
+	public static ProductDAO getInstacne() {
+		if(instance == null)
+			instance = new ProductDAO();
+		return instance;
+	}
+	
+	public void insertProduct(ProductDTO productDTO) throws SQLException {
+		String sql = "insert int product values(?,?,?,?,?)";
+		PreparedStatement pstmt = null;
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, productDTO.getPno());
+		pstmt.setString(2, productDTO.getPname());
+		pstmt.setInt(3, productDTO.getPrice());
+		pstmt.setInt(4, productDTO.getEa());
+		pstmt.setString(5, productDTO.getMaker());
+		pstmt.executeUpdate();
+		pstmt.close();
+	}
+	
+}
