@@ -1,0 +1,14 @@
+package org.korea.mvc.dao;
+
+import org.springframework.context.annotation.Bean;
+
+import config.DBManager;
+
+public class EmployeeDAO {
+	private DBManager manager;
+	
+	@Bean
+	public MemberDAO member() {
+		return new MemberDAO(manager());
+	}
+}

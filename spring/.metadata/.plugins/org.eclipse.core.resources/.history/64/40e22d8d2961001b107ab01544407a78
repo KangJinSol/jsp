@@ -1,0 +1,27 @@
+package org.korea.mvc.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import config.DBManager;
+
+public class MemberDAO {
+	private DBManager manager;
+	
+	public MemberDAO() {
+		manager = new DBManager();
+	}
+		
+		public MemberDTO login(String id, String pass) {
+			MemberDTO dto = null;
+			String sql = "select * from member where id = ? and pass = ?";
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			pstmt = manager.getConnection().prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setSr
+			
+			return dto;
+	}
+}

@@ -1,0 +1,11 @@
+package org.korea.mvc.dao;
+
+import config.DBManager;
+
+public class MemberDAO {
+	private DBManager manager;
+	
+	public MemberDAO() {
+		manager = new DBManager();
+	}
+}

@@ -91,6 +91,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\workspace\spring\SpringMVC"/>
 			<item value="C:\workspace\spring\Spring.DI"/>
 		</list>
 		<list key="projectNameTemplate">

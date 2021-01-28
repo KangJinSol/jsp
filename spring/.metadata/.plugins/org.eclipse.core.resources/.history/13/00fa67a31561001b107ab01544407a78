@@ -1,0 +1,24 @@
+package org.korea.mvc;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class MainController {
+	
+	@RequestMapping("/") //url만 입력했을때 www.google.com <--이런 상태
+	public String main() {
+		System.out.println("main()");
+		return "main";
+	}
+	@RequestMapping("/loginAction.do")
+	public String loginAction(@RequestParam("id") String id, @RequestParam("pass") String pass) {
+			System.out.println("loginAcion()");
+			System.out.println(id+","+pass);
+			
+			
+			return "main";
+		
+	}
+}
