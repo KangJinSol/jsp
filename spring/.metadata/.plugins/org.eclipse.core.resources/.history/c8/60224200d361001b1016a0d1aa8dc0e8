@@ -1,0 +1,24 @@
+package com.db;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.db.mapper.StudentMapper;
+
+public class StrudentService {
+	
+@Service
+public class StudentService{
+	private StudentMapper maper;
+	
+		
+
+	public StudentService(StudentMapper mapper) {
+		super();
+		this.maper = mapper;
+	}
+	
+	public List<StudentDTO> selectAllStudent();
+}
+}

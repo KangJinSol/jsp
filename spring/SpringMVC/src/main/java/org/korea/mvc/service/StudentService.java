@@ -1,5 +1,25 @@
 package org.korea.mvc.service;
 
-public class StudentService {
+import java.util.ArrayList;
 
+import org.korea.mvc.dao.StudentDAO;
+import org.korea.mvc.dto.StudentDTO;
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudentService {
+	
+	private StudentDAO dao;
+
+	public StudentService(StudentDAO dao) {
+		this.dao = dao;
+	}
+	
+	public ArrayList<StudentDTO> selectAllStudent(){
+		return dao.selectStudentAllList();
+	}
+	
+	
+	
+	
 }
