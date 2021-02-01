@@ -74,6 +74,7 @@
 	</section>
 	<section name="wizardPage">
 		<list key="groupId">
+			<item value="BoardClientProject"/>
 			<item value="ProductWeb"/>
 			<item value="DIWebProject"/>
 			<item value="EmployeeWeb"/>
@@ -81,6 +82,7 @@
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="BoardClientProject"/>
 			<item value="ProductWeb"/>
 			<item value="DIWebProject"/>
 			<item value="EmployeeWeb"/>

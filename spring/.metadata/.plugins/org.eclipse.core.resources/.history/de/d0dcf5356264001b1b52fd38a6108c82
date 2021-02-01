@@ -1,0 +1,3 @@
+select * from member;
+update member set grade = 0 where id = 'admin'
+commit;

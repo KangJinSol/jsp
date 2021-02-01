@@ -1,0 +1,5 @@
+select * from member;
+select * from grade_list;
+update member set grade = 0 where id = 'admin'
+commit;
+select id,pass,name,age,(select lower(grade_name) from grade_list where grade_no = grade) as grade  from member where id = 'admin' and pass = '1234'

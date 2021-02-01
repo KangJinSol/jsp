@@ -1,0 +1,8 @@
+
+public class MemberSearchMain {
+
+	public static void main(String[] args) {
+		//문자열 하나 콘솔에서 입력받음 --> 검색할 이름 일부분 입력
+	}
+
+}

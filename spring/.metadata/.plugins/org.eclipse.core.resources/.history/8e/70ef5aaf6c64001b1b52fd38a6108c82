@@ -1,0 +1,25 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+public class SendMemberLog {
+	
+	public static void main(String[] args) {
+		FileReader fr;
+		try {
+			fr = new FileReader("error.txt");
+			BufferedReader br = new BufferedReader(fr);
+
+			while(true) {
+				String str = br.readLine();//파일에서 로그 한줄 읽어옴
+				if(str == null) break;
+				sendLog(str.split("\t"));//서버로 전송
+			}
+			br.close();
+			fr.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
+}

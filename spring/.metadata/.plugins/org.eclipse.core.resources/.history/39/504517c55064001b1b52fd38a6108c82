@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class MemberSearchMain {
+
+	public static void main(String[] args) {
+		//문자열 하나 콘솔에서 입력받음 --> 검색할 이름 일부분 입력
+		String search = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("검색할 회원 이름 일부분을 입력하세요>");
+		search = sc.nextLine();
+		
+		//HTTP로 데이터를 요청
+		//1. 데이터를 요청할 API 주소를 문자열로 선언
+		//2. 전달할 파라메터를 인코딩 작업
+		//3. Url 완성. 주소랑 파라메터(쿼리 스트링)를 조합
+		
+	}
+
+}
