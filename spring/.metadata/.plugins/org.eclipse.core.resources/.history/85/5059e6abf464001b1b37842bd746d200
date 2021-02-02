@@ -1,0 +1,10 @@
+package batch;
+
+public class SendLogMain {
+
+	public static void main(String[] args) {
+		SendLogCronTrriger trriger = new SendLogCronTrriger("1/5 0 0 0 * *", SendLogJob.class)
+		trriger.trrigerJob();
+	}
+
+}

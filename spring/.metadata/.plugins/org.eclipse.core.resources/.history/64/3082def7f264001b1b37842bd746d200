@@ -1,0 +1,9 @@
+package batch;
+
+import org.quartz.Scheduler;
+
+public class SendLogCronTrriger {
+	private String timer;//크론식
+	private Class<? extends Job> job; //Job을 상속받는 애들만.
+	private Scheduler scheduler;
+}

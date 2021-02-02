@@ -13,33 +13,53 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import board.dto.BoardDTO;
 import board.dto.MemberDTO;
+import board.service.BoardService;
 import board.service.MemberService;
+import board.vo.PaggingVO;
 
 @Controller
 public class MainController {
 	private MemberService memberService;
-
-	public MainController(MemberService memberService) {
+	private BoardService boardService;
+	public MainController(MemberService memberService, BoardService boardService) {
 		super();
 		this.memberService = memberService;
+		this.boardService = boardService;
 	}
 
 	@RequestMapping("/")
-	public String main() {
+	public String main(HttpServletRequest request) {
+		return index(request);
+	}
+	
+	@RequestMapping("/index.do")
+	public String index(HttpServletRequest request) {
+		int page = 1;
+		//페이지 셋팅
+		if(request.getParameter("pageNo") != null)
+			page = Integer.parseInt(request.getParameter("pageNo"));
+		List<BoardDTO> list = boardService.selectBoardList(page);//글목록 읽어옴
+		int count = boardService.selectCount();
+		PaggingVO vo = new PaggingVO(count, page);
+		request.setAttribute("list", list);
+		request.setAttribute("pagging", vo);
+		System.out.println(list.toString());
 		return "main";
 	}
-
+	
+	@RequestMapping("logout.do")
+	public String logout(HttpServletRequest request, HttpSession session) {
+		session.invalidate();
+		return main(request);
+	}
+	
 	@RequestMapping("loginView.do")
 	public String loginView() {
 		return "login";
 	}
 
-	@RequestMapping("logout.do")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return main();
-	}
 
 	@RequestMapping("login.do")
 	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -53,7 +73,7 @@ public class MainController {
 			session.setAttribute("name", dto.getName());
 			session.setAttribute("grade", dto.getGrade());
 			session.setMaxInactiveInterval(10 * 60);
-
+			System.out.println("로그인 성공");
 			return "main";
 		} else {
 			try {
@@ -181,10 +201,27 @@ public class MainController {
 		int count = memberService.insertLog(log_date,code_number,message);
 		System.out.println(count);
 		try {
-			response.getWriter().write("true");
+			response.getWriter().write("add count + "+count);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+	@RequestMapping("/boardView.do")
+	public String boardView(HttpServletRequest request) {
+		//게시글 하나 읽음
+		//1. request에서 게시글 번호 읽어옴
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		//1-1. 해당 게시글 조회수 증가
+		boardService.addCount(bno);
+		//2. DB 해당 게시글 정보 읽어옴
+		BoardDTO dto = boardService.selectBoard(bno);
+		//2-1. 댓글 로드 부분
+		//3. request에 BoardDTO 저장
+		request.setAttribute("board", dto);
+		
+		return "board_detail_view";
+	}
+	
+	
 }

@@ -1,0 +1,16 @@
+package batch;
+
+import java.io.FileReader;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+public class SendLogJob implements Job{
+
+	@Override
+	public void execute(JobExecutionContext context) throws JobExecutionException {
+		FileReader fr = new FileReader("error.txt");
+	}
+	
+}

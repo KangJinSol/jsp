@@ -1,0 +1,21 @@
+package batch;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+public class SendLogJob implements Job{
+
+	@Override
+	public void execute(JobExecutionContext context) throws JobExecutionException {
+		try {
+			FileReader fr = new FileReader("error.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}
