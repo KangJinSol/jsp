@@ -1,0 +1,11 @@
+package student.mapper;
+
+import java.util.HashMap;
+import java.util.List;
+
+import student.dto.StudentDTO;
+
+public interface StudentMapper {
+	List<StudentDTO> selectAllStudent();
+	List<StudentDTO> selectSearchStudent(HashMap<String, Object> map)
+}

@@ -1,0 +1,30 @@
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Scanner;
+
+public class StudentSearchMain {
+
+	public static void main(String[] args) {
+		String search = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("검색할 학생 정보의 일부분을 입력하세요>");
+		search = sc.nextLine();
+		
+		try {
+			search = URLEncoder.encode(search,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+
+			try {
+				String apiUrl = "http://localhost:9999/memberSerach.do?kind=name&search="+search;
+				URL url = new URL(apiUrl);
+			} catch (MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+
+}

@@ -1,0 +1,5 @@
+import org.quartz.Job;
+
+public class SendLogJob implements Job{
+
+}

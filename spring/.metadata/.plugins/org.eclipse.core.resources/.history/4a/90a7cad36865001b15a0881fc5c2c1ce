@@ -1,0 +1,14 @@
+import java.util.Scanner;
+
+public class StudentSearchMain {
+
+	public static void main(String[] args) {
+		String search = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("검색할 학생 정보의 일부분을 입력하세요>");
+		search = sc.nextLine();
+		
+		String apiUrl = "http://localhost:9999/studentSerach.do?kind=name&search="+search;
+	}
+
+}

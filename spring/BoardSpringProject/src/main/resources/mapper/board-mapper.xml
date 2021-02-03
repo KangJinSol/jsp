@@ -30,4 +30,38 @@
 	<select id="selectBoard" parameterType="int" resultType="board.dto.BoardDTO">
 		select * from board where bno = #{bno}
 	</select>
+	<select id="selectBoardComment" parameterType="int" resultType="comment">
+		select * from board_comment where bno = #{bno}
+	</select>
+	<insert id="insertBoardComment" parameterType="board.dto.CommentDTO">
+		insert into board_comment(cno, bno, writer, content) values(board_comment_seq.nextval,#{bno},#{writer},#{content})
+	</insert>
+	<update id="updateCommentLike" parameterType="int">
+		update board_comment set blike = blike + 1 where cno = #{cno}  
+	</update>
+	<update id="updateCommentHate" parameterType="int">
+		update board_comment set bhate = bhate+ 1 where cno = #{cno}  
+	</update>
+	<update id="addBoardLikeHate" parameterType="map">
+		update board set 
+		<choose>
+			<when test="mode == 0">
+				blike = blike + 1
+			</when>
+			<otherwise>
+				bhate = bhate + 1
+			</otherwise>
+		</choose>
+		where bno = #{bno}
+	
+	</update>
+	<select id="newBno" resultType="int">
+		select bno_seq.nextval from dual
+	</select>
+	<insert id="insertBoard" parameterType="board.dto.BoardDTO">
+		insert into board(bno,title,writer,content) values(#{bno},#{title},#{writer},#{content})
+	</insert>
+	<insert id="insertFileList" parameterType="board.dto.FileDTO">
+		insert into board_file_list values(#{bno},#{writer},#{fileName})
+	</insert>
 </mapper>

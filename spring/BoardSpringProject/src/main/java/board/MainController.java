@@ -1,5 +1,6 @@
 package board;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import board.dto.BoardDTO;
+import board.dto.CommentDTO;
+import board.dto.FileDTO;
 import board.dto.MemberDTO;
 import board.service.BoardService;
 import board.service.MemberService;
@@ -74,7 +79,7 @@ public class MainController {
 			session.setAttribute("grade", dto.getGrade());
 			session.setMaxInactiveInterval(10 * 60);
 			System.out.println("로그인 성공");
-			return "main";
+			return index(request);
 		} else {
 			try {
 				response.setContentType("text/html;charset=utf-8");
@@ -192,7 +197,7 @@ public class MainController {
 		return null;
 	}
 	
-	@RequestMapping("sendLog.do")
+	@RequestMapping("/sendLog.do")
 	public String sendLog(HttpServletRequest request, HttpServletResponse response) {
 		String log_date = request.getParameter("log_date");
 		int code_number = Integer.parseInt(request.getParameter("code_number"));
@@ -211,17 +216,111 @@ public class MainController {
 	public String boardView(HttpServletRequest request) {
 		//게시글 하나 읽음
 		//1. request에서 게시글 번호 읽어옴
-		int bno = Integer.parseInt(request.getParameter("bno"));
+		int bno = 0;
+		if(request.getParameter("bno") != null)
+			bno = Integer.parseInt(request.getParameter("bno"));
+		else
+			bno = (int)request.getAttribute("bno");
 		//1-1. 해당 게시글 조회수 증가
 		boardService.addCount(bno);
 		//2. DB 해당 게시글 정보 읽어옴
 		BoardDTO dto = boardService.selectBoard(bno);
 		//2-1. 댓글 로드 부분
-		//3. request에 BoardDTO 저장
+		List<CommentDTO> list = boardService.selectBoardComment(bno);
+		//2-2. 첨부파일 로드 부분
+		
+		//3. request에 BoardDTO, CommentList 저장
 		request.setAttribute("board", dto);
+		request.setAttribute("comment", list);
+		
 		
 		return "board_detail_view";
 	}
 	
+	@RequestMapping("/insertComment.do")
+	public String insertComment(HttpServletRequest request, HttpServletResponse response) {
+		
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		String writer = request.getParameter("writer");
+		String content = request.getParameter("content");
+		
+		boardService.insertComment(new CommentDTO(bno, content, writer));
+		
+		return null;
+	}
+	@RequestMapping("/commentLike.do")
+	public String commentLike(HttpServletRequest request) {
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		boardService.updateCommentLike(cno);
+		return boardView(request);
+	}
+	@RequestMapping("/commentHate.do")
+	public String commentHate(HttpServletRequest request) {
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		boardService.updateCommentHate(cno);
+		return boardView(request);
+	}
+	@RequestMapping("/plusLikeHate.do")
+	public String plusLikeHate(HttpServletRequest request, HttpServletResponse response) {
+		int bno = Integer.parseInt((String)request.getParameter("bno"));
+		int mode =Integer.parseInt((String)request.getParameter("mode"));
+		
+		int count = 0;
+		
+		count = boardService.addBoardLikeHate(mode, bno);
+		try {
+			response.getWriter().write(String.valueOf(count));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@RequestMapping("/boardWriteView.do")
+	public String boardWriteView() {
+		return "board_write_view";
+	}
+	
+	@RequestMapping("/boardWriteAction.do")
+	public String boardWriteAction(MultipartHttpServletRequest request) {
+		//글번호 먼저 발급
+		int bno = boardService.newBno();
+		
+		String title = request.getParameter("title");
+		String writer = request.getParameter("writer");
+		String content = request.getParameter("content");
+		boardService.insertBoard(new BoardDTO(bno, title, writer, content));
+		request.setAttribute("bno", bno);
+		
+		List<MultipartFile> fileList = request.getFiles("file"); 
+		System.out.println(fileList.size());
+		String path = "c:\\fileupload\\"+writer+"\\";
+		ArrayList<FileDTO> fList =new  ArrayList<FileDTO>();
+		
+		for(MultipartFile mf : fileList) {
+			String originalFileName = mf.getOriginalFilename();
+			long fileSize = mf.getSize();
+			if(fileSize == 0) continue;
+			System.out.println("originalFileName : " + originalFileName);
+			System.out.println("fileSize : "+ fileSize);
+			
+			try {
+			//파일 업로드
+			String safeFile = path + originalFileName;
+			fList.add(new FileDTO(bno, writer, originalFileName));
+			File parentPath = new File(path);
+			if(!parentPath.exists()) parentPath.mkdirs();//경로 생성
+				mf.transferTo(new File(safeFile));	
+			
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		boardService.insertFileList(fList);
+		return boardView(request);
+	}
 	
 }

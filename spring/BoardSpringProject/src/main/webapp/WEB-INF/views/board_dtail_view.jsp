@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,111 +54,35 @@
 		background-color: #282828;
 		color:#FFFFFF
 	}
-	.hate{
-		transform: rotate(0.5turn);
-	}
-	.text_center{
-		text-align: center;
-	}
-	.btn_like{
-		width:64px;
-		display: inline-block;
-		color:black;
-		text-decoration: none;
-	}
-	.comment_form{
+	textarea {
 		width:100%;
-		border :1px solid black;
-	}
-	.writer{
-		width: 100%;
-		display: inline-block;
-		font-weight: bold;
-		padding-left: 30px;
-	}
-	.comment_form textarea{
-		width:100%;
-		height: 80px;
-		margin-top:10px;
-		font-size: 18px;
-		padding-left: 30px;
-		padding-right: 30px;
-		outline:none;
-		border: none;
+		height: 300px;
 		resize: none;
 		box-sizing: border-box;
-		
 	}
-	.comment_form button{
-		width: 100px;
-		height: 40px;
-		font-weight: bold;
-		background-color: #ffff00;	
-		outline:none;
-		border: none;
-	}
-	.comment_form button:hover{
-		background-color: #dfdf25;	
-	}
-	.length{
-		text-align: right;
-		padding:10px 30px;
-	}
-	hr{
-	margin:0;
-	}
-	.comment_form p {
-		margin:0;
+	p input{
+		width:80% !important;
 	}
 </style>
+</head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
-		$(".comment_form textarea").keyup(function() {
-			$(this).next().text($(this).val().length+"/500");
+		var count = 3;//첨부파일 태그 개수
+		$("#plus").click(function(){
+			if(count == 5) return;
+			count++;
+			$("#file_form").append("<p><input type='file' name='file"+count+"'></p>");
 		});
-		$(".comment_form button").click(function(){
-			var data = $("#comment").serialize();
-			$.ajax({
-				url : "insertComment.do",
-				data : data,
-				method:"get",
-				success:function(d){
-					alert("댓글 등록 성공 : " + d);
-					location.reload();	
-				}
-			});
-		});
-		$(".btn_like").click(function(){
-			// 0 - like, 1 - hate
-			// bno;
-			var obj = $(this);
-			d = "bno=${requestScope.board.bno}&mode="+$(this).index();
-			$.ajax({
-				url : "plusLikeHate.do",
-				data : d,
-				method : "get",
-				success:function(result){
-					result = result.trim();
-					if(result == "false"){
-						alert("로그인후 이용하실 수 있습니다.");
-						location.href="${pageContext.request.contextPath}/loginView.do";
-					}
-					console.log(result, result.length);
-					$(obj).children("span").html(result);
-					
-				},
-				error : function(request, status, error) {
-					alert(request.responseText.trim());
-					location.href="${pageContext.request.contextPath}/loginView.do";
-					
-				}
-			});
+		$("#minus").click(function(){
+			if(count == 1) return;
+				$(this).parent().parent().children("p").last().remove();
+			count--;
 		});
 	});
 </script>
-</head>
 <body>
+
 	<c:if test="${sessionScope.login == null || sessionScope.login == false  }">
 		<c:set var="page" target="${sessionScope }" value="${pageContext.request.requestURI}${pageContext.request.queryString }" property="resultPage" scope="session"/>
 		${pageContext.request.requestURI}${pageContext.request.queryString }
@@ -168,116 +91,44 @@
 			location.href="loginView.do";
 		</script>
 	</c:if>
-
+	
 	<jsp:include page="template/header.jsp" flush="false"></jsp:include>
 	<div id="container">
-		<h2>글조회 페이지</h2>
+		<h2>글쓰기 페이지</h2>
+		<form action="boardWriteAction.do" enctype="multipart/form-data" method="post">
 			<table>
 				<tr>
 					<th>제목</th>
-					<td>
-						<!-- 조회한 내용 -->
-						${requestScope.board.title }
-					</td>
+					<td><input type="text" name="title"></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
 					<td>
-						${requestScope.board.writer }			
+						<input type="hidden" name="writer" value="${sessionScope.id }">
+						${sessionScope.id }
 					</td>
 				</tr>
 				<tr>
-					<th>조회수</th>
-					<td>
-						${requestScope.board.bCount }
+					<th style="vertical-align: top;">내용</th><td><textarea name="content"></textarea></td>
+				</tr>
+				<!-- 첨부 파일 -->
+				<tr>
+					<td colspan="2" id="file_form">
+						<p><input type="file" name="file1"> 
+						<button type="button" id="plus">+</button> <button type="button" id="minus">-</button></p>
+						<p><input type="file" name="file2"></p>
+						<p><input type="file" name="file3"></p>
 					</td>
 				</tr>
 				<tr>
-					<th>작성일</th>
-					<td>
-						${requestScope.board.bDate }
-					</td>
-				</tr>
-				<tr>
-					<th style="vertical-align: top;">내용</th>
-					<td>
-						${requestScope.board.content }
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						첨부파일<br>
-						<c:forEach var="f" items="${requestScope.file }">
-							<a href="filedownload.jsp?writer=${f.writer }&file=${f.fileName}">
-							${f.fileName}</a><br>
-							<!-- 해당 파일이 이미지인지? -->
-							<c:if test="${f.type =='image' }">
-								<img src="imageLoad.do?writer=${f.writer }&file=${f.fileName}&type=${f.type}">
-							</c:if>
-						</c:forEach>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" class="text_center">
-						<a href="#" class="btn_like">
-							<img src="${pageContext.request.contextPath }/img/like.png">
-							<!-- 좋아요 개수 -->
-							<span>${requestScope.board.bLike }</span>
-						</a>
-						<a href="#" class="btn_like">
-							<img src="${pageContext.request.contextPath }/img/like.png" class="hate">
-							<!-- 싫어요 개수 -->
-							<span>${requestScope.board.bHate }</span>
-						</a>
-					</td>
-				</tr>
-				<c:if test="${sessionScope.login == true}">
-				<tr>
-					<td colspan="2">
-						<div class="comment_form">
-							<form id="comment">
-							<input type="hidden" name="bno" value="${requestScope.board.bno }">
-							<input type="hidden" name="writer" value="${sessionScope.id }">
-							<span class="writer">${sessionScope.id }</span>
-							<textarea name="content" maxlength="500"></textarea>
-							<p class="length">0/500</p><hr>
-							<p style="text-align: right;"><button type="button">등록</button></p>
-							</form>							
-						</div>
-					</td>
-				</tr>
-					</c:if>
-				<tr>
-					<th><a href="javascript:history.back();" class="btn">목록보기</a></th>
+					<th><a href="main.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">목록보기</a></th>
 					<td style="text-align: right;">
-					<c:if test="${sessionScope.id == requestScope.board.writer }">
-						<a href="#" class="btn">수정</a>
-						<a href="deleteBoard.do?bno=${requestScope.board.bno }" class="btn">삭제</a>
-					</c:if>
-						<a href="#" class="btn">이전글</a>
-						<a href="#" class="btn">다음글</a>
-						
+						<a href="javascript:history.back();" class="btn">뒤로가기</a>
+						<button class="btn">글쓰기</button>
 					</td>
-				</tr>
-				<tr>
-				
-						<td colspan="2">
-					
-					<c:forEach var="comment" items="${requestScope.comment }">
-						<p>${comment.writer }
-						${comment.date }
-						${comment.blike }
-						${comment.bhate }
-						</p>
-						<p>
-							${comment.content }
-						</p>
-					</c:forEach>
-					
-						</td>
-							
 				</tr>
 			</table>
+		</form>
 	</div>
 	<jsp:include page="template/footer.jsp" flush="false"></jsp:include>
 </body>

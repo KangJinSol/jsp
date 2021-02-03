@@ -1,0 +1,9 @@
+package student.mapper;
+
+import java.util.List;
+
+import student.dto.StudentDTO;
+
+public interface StudentMapper {
+	List<StudentDTO> selectAllStudent();
+}

@@ -1,0 +1,7 @@
+
+public class StudentSearchTest {
+	public static void main(String[] args) {
+		SendLogCronTrriger trigger = new SendLogCronTrriger("5 * * * * ?", SendLogJob.class);
+		trigger.triggerJob();
+	}
+}

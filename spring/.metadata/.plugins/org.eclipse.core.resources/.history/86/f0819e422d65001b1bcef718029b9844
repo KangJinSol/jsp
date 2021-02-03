@@ -1,0 +1,32 @@
+package student;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import board.dto.BoardDTO;
+import board.vo.PaggingVO;
+import student.dto.StudentDTO;
+import student.service.StudentService;
+
+public class MainController {
+	private StudentService studentService;
+
+	public MainController() {
+		super();
+		this.studentService = studentService;
+	}
+	
+	@RequestMapping("/")
+	public String main(HttpServletRequest request) {
+		return main(request);
+	
+	}
+	
+	@RequestMapping("/main.do")
+	public String StudentSearch(HttpServletRequest request)
+
+	}
+}

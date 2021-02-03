@@ -1,0 +1,8 @@
+package student.dto;
+
+public class StudentDTO {
+	String sno;
+	String name;
+	String major;
+	int score;
+}

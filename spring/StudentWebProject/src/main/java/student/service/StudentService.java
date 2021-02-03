@@ -1,0 +1,43 @@
+package student.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import student.dto.StudentDTO;
+import student.mapper.StudentMapper;
+
+@Service
+public class StudentService {
+	private StudentMapper mapper;
+	
+	public StudentService(StudentMapper mapper) {
+		super();
+		this.mapper = mapper;
+	}
+	
+	public StudentDTO selectStudent(String sno, String name, String major) {
+		return mapper.selectStudent(sno,name,major);
+	}
+	
+	public List<StudentDTO> selectAllStudent() {
+		return mapper.selectAllStudent();
+	}
+	
+	public List<StudentDTO> selectSearchStudent(String kind, String search) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("kind", kind);
+		map.put("search", search);
+		return mapper.selectSearchStudent(map);
+	}
+
+	public int insertLog(String log_date, int code_number, String message) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("log_date", log_date);
+		map.put("code_number", code_number);
+		map.put("message", message);
+		
+		return mapper.insertLog(map);
+	}
+}

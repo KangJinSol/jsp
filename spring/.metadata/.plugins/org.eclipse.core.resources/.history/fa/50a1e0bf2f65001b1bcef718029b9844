@@ -1,0 +1,11 @@
+package student.service;
+
+import java.util.List;
+
+
+public class StudentService {
+
+	public List<StudentDTO> selectAllStudent() {
+		return mapper.selectAllStudent();
+	}
+}
