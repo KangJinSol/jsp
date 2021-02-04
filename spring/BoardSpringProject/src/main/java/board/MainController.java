@@ -1,7 +1,12 @@
 package board;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,23 +20,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.view.RedirectView;
 
 import board.dto.BoardDTO;
 import board.dto.CommentDTO;
 import board.dto.FileDTO;
 import board.dto.MemberDTO;
+import board.dto.QnaDTO;
 import board.service.BoardService;
 import board.service.MemberService;
+import board.service.QnAService;
 import board.vo.PaggingVO;
 
 @Controller
 public class MainController {
 	private MemberService memberService;
 	private BoardService boardService;
-	public MainController(MemberService memberService, BoardService boardService) {
-		super();
+	private QnAService qnaSerivce;
+	public MainController(MemberService memberService, BoardService boardService, QnAService qnAService) {
 		this.memberService = memberService;
 		this.boardService = boardService;
+		this.qnaSerivce = qnAService;
 	}
 
 	@RequestMapping("/")
@@ -228,10 +237,12 @@ public class MainController {
 		//2-1. 댓글 로드 부분
 		List<CommentDTO> list = boardService.selectBoardComment(bno);
 		//2-2. 첨부파일 로드 부분
-		
+		List<FileDTO> fList = boardService.selectFileList(bno);
+		System.out.println(fList.toString());
 		//3. request에 BoardDTO, CommentList 저장
 		request.setAttribute("board", dto);
 		request.setAttribute("comment", list);
+		request.setAttribute("file", fList);
 		
 		
 		return "board_detail_view";
@@ -282,7 +293,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/boardWriteAction.do")
-	public String boardWriteAction(MultipartHttpServletRequest request) {
+	public RedirectView boardWriteAction(MultipartHttpServletRequest request) {
 		//글번호 먼저 발급
 		int bno = boardService.newBno();
 		
@@ -303,6 +314,7 @@ public class MainController {
 			if(fileSize == 0) continue;
 			System.out.println("originalFileName : " + originalFileName);
 			System.out.println("fileSize : "+ fileSize);
+			System.err.println(mf.getContentType());
 			
 			try {
 			//파일 업로드
@@ -320,7 +332,133 @@ public class MainController {
 			
 		}
 		boardService.insertFileList(fList);
-		return boardView(request);
+//		return "redirect:boardView.do?bno="+bno;
+		return new RedirectView("boardView.do?bno="+bno);
+	}
+	@RequestMapping("/fileDownload.do")
+	public String fileDownload(HttpServletRequest request, HttpServletResponse response) {
+		String fileName = request.getParameter("file");
+		String writer = request.getParameter("writer");
+		String path = "c:\\fileupload\\"+writer+"\\"+fileName;
+
+		File file = new File(path);
+		try {
+			FileInputStream fis = new FileInputStream(file);
+			String encodingName = URLEncoder.encode(path,"utf-8");
+			fileName = URLEncoder.encode(fileName,"utf-8");
+			response.setHeader("Content-Disposition", "attachment;filename="+fileName);
+			response.setHeader("Content-Transfer-Encode", "binary");
+			response.setContentLength((int)file.length());
+			BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+			byte[] buffer = new byte[1024*1024];
+			while(true) {
+				int count = fis.read(buffer);
+				if(count == -1) break;
+				bos.write(buffer, 0, count);
+				bos.flush();
+			}
+			fis.close();
+			bos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@RequestMapping("/imageLoad.do")
+	public String imageLoad(HttpServletRequest request, HttpServletResponse response) {
+		String fileName = request.getParameter("file");
+		String writer = request.getParameter("writer");
+		String path = "c:\\fileupload\\"+writer+"\\"+fileName;
+
+		File file = new File(path);
+		try {
+			FileInputStream fis = new FileInputStream(file);
+			String encodingName = URLEncoder.encode(path,"utf-8");
+			fileName = URLEncoder.encode(fileName,"utf-8");
+			BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+			byte[] buffer = new byte[1024*1024];
+			while(true) {
+				int count = fis.read(buffer);
+				if(count == -1) break;
+				bos.write(buffer, 0, count);
+				bos.flush();
+			}
+			fis.close();
+			bos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
+	@RequestMapping("/qnaView.do")
+	public String qnaView(HttpServletRequest request) {
+		int pageNo = 1;
+		String id = (String) request.getSession().getAttribute("id");
+		String grade = (String) request.getSession().getAttribute("grade");
+		List<QnaDTO> list = qnaSerivce.selectQnaList(id,pageNo,grade);
+		System.out.println(list.toString());
+		request.setAttribute("list", list);
+		return "qna";
+	}
+	@RequestMapping("/qnaAdminView.do")
+	public String qnaAdminView(HttpServletRequest request) {
+		String id = (String) request.getSession().getAttribute("id");
+		String grade = (String) request.getSession().getAttribute("grade");
+		int pageNo = 1;
+		if(request.getParameter("pageNo") != null)
+			 pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		List<QnaDTO> list = qnaSerivce.selectQnaList(id, pageNo, grade);
+		int count = qnaSerivce.selectCount();
+		PaggingVO vo = new PaggingVO(count, pageNo);
+		System.out.println(vo);
+		request.getSession().setAttribute("page", vo);
+		request.getSession().setAttribute("list", list);
+		return "admin_qna";
+	}
+	@RequestMapping("/sendQnA.do")
+	public String sendQnA(HttpServletRequest request, HttpServletResponse response) {
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String writer = (String) request.getSession().getAttribute("id");
+		int count = qnaSerivce.insertQnA(new QnaDTO(title, content, writer));
+		
+		if(count == 0) {
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().append("<script>alert('문의 등록중 문제가 생겼습니다');history.back();</script>");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			return qnaView(request);
+		}
+		return null;
+	}
+	@RequestMapping("adminQnaDetailView.do")
+	public String adminQnaDetailView(HttpServletRequest request, HttpServletResponse response) {
+		int qno = Integer.parseInt(request.getParameter("qno"));
+		QnaDTO dto = qnaSerivce.selectQna(qno);
+		if(dto == null) {
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("<script>alert('문의글이 없습니다.'); history.back();</script>");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println(dto);
+			request.setAttribute("dto", dto);
+			return "admin_qna_view";
+		}
+		return null;
+	}
 }

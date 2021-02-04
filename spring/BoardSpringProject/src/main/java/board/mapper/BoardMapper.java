@@ -1,3 +1,4 @@
+  
 package board.mapper;
 
 import java.util.HashMap;
@@ -24,5 +25,6 @@ public interface BoardMapper {
 	int newBno();
 	int insertBoard(BoardDTO dto);
 	void insertFileList(FileDTO dto);
+	List<FileDTO> selectFileList(int bno);
 
 }
